@@ -1,0 +1,3265 @@
+Multi-League Manager: Technisch Database Referentiedocument
+1. Database Schema Definities
+1.1. persons (Personen: Spelers & Staf)
+Veldsleutel (Key)
+Naam/Omschrijving
+Datatype
+Verplicht (Required)
+Categorie Koppeling (Category ID)
+id
+Person ID (bijv. PER_001)
+text
+Ja
+name_first
+First Name
+text
+Ja
+name_last
+Last Name
+text
+Ja
+name_extra_flags
+Name Extra Flags (Bitmask)
+select
+Nee
+NAME_EXTRA_FLAGS
+gender
+Gender
+select
+Nee
+GENDER
+nationality_declared
+Nationality (NAT_ID)
+text
+Nee
+nations (Schema)
+language_primary
+Primary Language
+select
+Nee
+LANGUAGE
+handedness
+Handedness
+select
+Nee
+CAT_HND
+junior_preference
+Junior Preference
+select
+Nee
+JUNIOR_PREFERENCE
+job_primary
+Primary Job
+select
+Nee
+CAT_JOB
+staff_classification
+Staff Classification
+select
+Nee
+CAT_STF_CLS
+staff_extra_flags
+Staff Extra Flags (Bitmask)
+select
+Nee
+STAFF_EXTRA_FLAGS
+1.2. person_encounters (Persoon x Seizoen)
+Veldsleutel (Key)
+Naam/Omschrijving
+Datatype
+Verplicht (Required)
+Categorie Koppeling (Category ID)
+id
+Encounter ID (bijv. PER_001:SZN_26)
+text
+Ja
+season_id
+Season ID
+text
+Ja
+job_level
+Job Level
+select
+Nee
+JOB_LEVEL
+player_role
+Player Role
+select
+Nee
+CAT_PLR_ROL
+position_type
+Position Type
+select
+Nee
+CAT_POS_TYP
+team_id
+Team ID (TEA_ID)
+relation
+Nee
+teams (Schema)
+jersey_number
+Jersey Number
+number
+Nee
+1.3. organizations (Organisaties/Verenigingen)
+Veldsleutel (Key)
+Naam/Omschrijving
+Datatype
+Verplicht (Required)
+Categorie Koppeling (Category ID)
+id
+Org ID (bijv. ORG_001)
+text
+Ja
+name
+Organization Name
+text
+Ja
+short_name
+Short Name
+text
+Nee
+professional_status
+Professional Status
+select
+Nee
+CAT_PRO_STA
+colors_primary
+Primary Colors (Hex/Str)
+text
+Nee
+colors_secondary
+Secondary Colors (Hex/Str)
+text
+Nee
+currency_type
+Currency Type
+text
+Nee
+league_id
+League ID
+relation
+Nee
+competitions (Schema)
+1.4. org_encounters (Organisatie x Seizoen)
+Veldsleutel (Key)
+Naam/Omschrijving
+Datatype
+Verplicht (Required)
+Categorie Koppeling (Category ID)
+id
+Encounter ID (bijv. ORG_001:SZN_26)
+text
+Ja
+season_id
+Season ID
+text
+Ja
+club_valuation
+Club Valuation
+select
+Nee
+CLUB_VALUATION
+continental_licence
+Continental Licence
+select
+Nee
+CONTINENTAL_LICENCE
+affiliation_network
+Affiliation Network
+json_array
+Nee
+1.5. teams (Teams)
+Veldsleutel (Key)
+Naam/Omschrijving
+Datatype
+Verplicht (Required)
+Categorie Koppeling (Category ID)
+id
+Team ID (bijv. TEA_001)
+text
+Ja
+org_id
+Organization ID (ORG_ID)
+relation
+Ja
+organizations (Schema)
+name
+Team Name
+text
+Ja
+squad_playing
+Squad Playing
+select
+Nee
+SQUAD_PLAYING
+1.6. competitions (Competities)
+Veldsleutel (Key)
+Naam/Omschrijving
+Datatype
+Verplicht (Required)
+Categorie Koppeling (Category ID)
+id
+Comp ID (bijv. CMP_001)
+text
+Ja
+name
+Competition Name
+text
+Ja
+comp_type
+Competition Type
+select
+Nee
+CAT_CMP_TYP
+comp_scope
+Competition Scope
+select
+Nee
+CAT_CMP_SCP
+comp_classification
+Classification
+select
+Nee
+CAT_CMP_CLS
+approximate_region
+Approximate Region
+select
+Nee
+APPROXIMATE_REGION
+league_selected
+League Selected
+boolean
+Nee
+1.7. comp_encounters (Competitie Settings/Seizoen)
+Veldsleutel (Key)
+Naam/Omschrijving
+Datatype
+Verplicht (Required)
+Categorie Koppeling (Category ID)
+id
+Encounter ID (CMP_001:SZN_26)
+text
+Ja
+season_id
+Season ID
+text
+Ja
+basic_rules_flags
+Basic Rules (Bitmask)
+select
+Nee
+BASIC_RULES_FLAGS
+match_rules
+Match Rules (Bitmask)
+select
+Nee
+MATCH_RULES_FLAGS
+extra_match_rules
+Extra Match Rules
+select
+Nee
+EXTRA_MATCH_RULES
+extra_rule_type
+Extra Rule Type
+select
+Nee
+EXTRA_RULE_TYPE
+round_rules
+Round Rules
+select
+Nee
+ROUND_RULES
+team_picking_rules
+Team Picking Rules
+select
+Nee
+TEAM_PICKING_RULES
+replay_rules
+Replay Rules
+select
+Nee
+REPLAY_RULES
+sort_rule
+Sort Rule
+select
+Nee
+CAT_SRT_RUL
+transfer_system_type
+Transfer System
+select
+Nee
+TRANSFER_SYSTEM_TYPE
+transfer_rules_flags
+Transfer Rules (Bitmask)
+select
+Nee
+TRANSFER_RULES_FLAGS
+salary_cap_type
+Salary Cap Type
+select
+Nee
+CAT_SAL_CAP
+prize_money_type
+Prize Money Type
+select
+Nee
+CAT_PRZ_MON
+fighting_penalty
+Fighting Penalty
+select
+Nee
+CAT_FGT_PEN
+misconduct_accumulator_type
+Misconduct Accumulator
+select
+Nee
+CAT_MSC_ACC
+fate_rules
+Fate Rules
+select
+Nee
+FATE_RULES
+fate_to_draw_from
+Fate To Draw From
+select
+Nee
+FATE_TO_DRAW_FROM
+stats_scope
+Stats Scope
+select
+Nee
+STATS_SCOPE
+win_pct_type
+Win PCT Type
+select
+Nee
+CAT_WIN_PCT
+tv_type
+TV Type
+select
+Nee
+TV_TYPE
+1.8. stages (Fases & Rondes)
+Veldsleutel (Key)
+Naam/Omschrijving
+Datatype
+Verplicht (Required)
+Categorie Koppeling (Category ID)
+id
+Stage ID (bijv. STG_001)
+text
+Ja
+network_cmp
+Competition ID (CMP_ID)
+text
+Ja
+stage_type
+Stage Type
+select
+Nee
+STAGE_TYPE
+stage_name_extra
+Stage Name Extra
+text
+Nee
+round_type
+Round Type
+select
+Nee
+ROUND_TYPE
+group_type
+Group Type
+select
+Nee
+GROUP
+group_membership
+Group Membership
+select
+Nee
+GROUP_MEMBERSHIP
+1.9. venues (Sportaccommodaties)
+Veldsleutel (Key)
+Naam/Omschrijving
+Datatype
+Verplicht (Required)
+Categorie Koppeling (Category ID)
+id
+Venue ID (bijv. VEN_001)
+text
+Ja
+name
+Locatie Naam
+text
+Ja
+capacity
+Capaciteit (Toeschouwers)
+number
+Nee
+region_actual
+Regio
+select
+Nee
+REGION_ACTUAL
+arena_rink_size
+IJsvloer
+select
+Nee
+CAT_RNK_SIZ
+1.10. nations (Naties)
+Veldsleutel (Key)
+Naam/Omschrijving
+Datatype
+Verplicht (Required)
+Categorie Koppeling (Category ID)
+id
+Nation ID (bijv. NAT_001)
+text
+Ja
+name
+Nation Name
+text
+Ja
+nation_extra_data
+Nation Extra Data
+text
+Nee
+state_extra_data
+State Extra Data
+text
+Nee
+development_state
+Development State
+select
+Nee
+DEVELOPMENT_STATE
+iihf_senior_division
+IIHF Senior Division
+select
+Nee
+IIHF_SENIOR_DIVISION
+iihf_junior_division
+IIHF Junior Division
+select
+Nee
+IIHF_JUNIOR_DIVISION
+1.11. ruling_bodies (Bestuurlijke Organen)
+Veldsleutel (Key)
+Naam/Omschrijving
+Datatype
+Verplicht (Required)
+Categorie Koppeling (Category ID)
+id
+Ruling Body ID (bijv. RUL_001)
+text
+Ja
+NAAM
+Naam (bijv. IIHF)
+text
+Ja
+ORG_TYPE
+Bestuurlijk Type
+select
+Nee
+CAT_RUL_BOD
+ORG_INDI
+Bestuurlijke Indicatoren
+select
+Nee
+RULING_BODY_FLAGS
+ORG_AFK
+Naam Afkorting
+text
+Nee
+1.12. medical_injuries (Blessures)
+Veldsleutel (Key)
+Naam/Omschrijving
+Datatype
+Verplicht (Required)
+Categorie Koppeling (Category ID)
+id
+Injury ID
+text
+Ja
+person_id
+Person ID (PER_ID)
+relation
+Ja
+persons (Schema)
+injury_extra_data
+Injury Type/Data
+text
+Nee
+date_injured
+Date Injured
+datetime
+Nee
+expected_return
+Expected Return
+datetime
+Nee
+1.13. drafts (Drafts)
+Veldsleutel (Key)
+Naam/Omschrijving
+Datatype
+Verplicht (Required)
+Categorie Koppeling (Category ID)
+id
+Draft ID
+text
+Ja
+year
+Draft Year
+number
+Ja
+league_id
+League ID
+relation
+Ja
+competitions (Schema)
+draft_extra_data
+Draft Extra Data
+text
+Nee
+1.14. financials (Financieel Stamgegevens)
+Veldsleutel (Key)
+Naam/Omschrijving
+Datatype
+Verplicht (Required)
+Categorie Koppeling (Category ID)
+id
+Finance ID
+text
+Ja
+network_org
+Organization ID (ORG_ID)
+relation
+Ja
+organizations (Schema)
+bank_balance_start
+Starting Bank Balance
+number
+Nee
+1.15. ledgers (Financieel Maandelijks)
+Veldsleutel (Key)
+Naam/Omschrijving
+Datatype
+Verplicht (Required)
+Categorie Koppeling (Category ID)
+id
+Ledger ID (bijv. FIN_001:2026-07)
+text
+Ja
+month_id
+Month
+select
+Nee
+MONTH
+total_income
+Total Income
+number
+Nee
+total_expenses
+Total Expenses
+number
+Nee
+net_profit_loss
+Net Profit/Loss
+number
+Nee
+income_line_items
+Income Line Items
+json_array
+Nee
+CAT_FIN_INC
+expense_line_items
+Expense Line Items
+json_array
+Nee
+CAT_FIN_EXP
+1.16. games (Wedstrijden)
+Veldsleutel (Key)
+Naam/Omschrijving
+Datatype
+Verplicht (Required)
+Categorie Koppeling (Category ID)
+id
+Game ID (bijv. GAM_102)
+text
+Ja
+league_id
+League ID
+relation
+Nee
+competitions (Schema)
+season_id
+Season ID
+text
+Ja
+home_team_id
+Home Team ID
+relation
+Ja
+teams (Schema)
+away_team_id
+Away Team ID
+relation
+Ja
+teams (Schema)
+status
+Game Status (bijv. scheduled, live)
+text
+Nee
+current_period
+Current Period
+number
+Nee
+time_remaining
+Time Remaining
+text
+Nee
+score
+Score (Home/Away)
+json_array
+Nee
+shots_on_goal
+Shots on Goal
+json_array
+Nee
+venue_id
+Venue ID
+relation
+Nee
+venues (Schema)
+start_time
+Start Time
+datetime
+Nee
+1.17. game_events (Live Wedstrijd Gebeurtenissen)
+Veldsleutel (Key)
+Naam/Omschrijving
+Datatype
+Verplicht (Required)
+Categorie Koppeling (Category ID)
+id
+Event ID
+text
+Ja
+game_id
+Game ID
+text
+Ja
+timestamp
+Timestamp
+datetime
+Nee
+period
+Period
+number
+Nee
+time_in_period
+Time In Period
+text
+Nee
+team_id
+Team ID
+relation
+Nee
+teams (Schema)
+type
+Event Type (goal, penalty, etc.)
+text
+Nee
+event_details
+Specific Details
+json_array
+Nee
+1.18. team_encounters (Team Tactiek & Belang)
+Veldsleutel (Key)
+Naam/Omschrijving
+Datatype
+Verplicht (Required)
+Categorie Koppeling (Category ID)
+id
+Encounter ID (TEA_001:GAM_102)
+text
+Ja
+game_id
+Game ID
+text
+Ja
+tactic_used
+Tactic Used
+select
+Nee
+TACTIC
+game_importance
+Game Importance
+select
+Nee
+GAME_IMPORTANCE
+1.19. developments (Development Records)
+Veldsleutel (Key)
+Naam/Omschrijving
+Datatype
+Verplicht (Required)
+Categorie Koppeling (Category ID)
+id
+Dev ID
+text
+Ja
+network_per
+Person ID (PER_ID)
+relation
+Ja
+persons (Schema)
+current_potential_ceiling
+Potential Ceiling (1-200)
+number
+Nee
+1.20. weekly_plans (Wekelijkse Trainingsplannen)
+Veldsleutel (Key)
+Naam/Omschrijving
+Datatype
+Verplicht (Required)
+Categorie Koppeling (Category ID)
+id
+Plan ID (bijv. DEV_001:WK_32)
+text
+Ja
+week_number
+Week Number (1-52)
+number
+Nee
+network_coach_per
+Coach ID (PER_ID)
+relation
+Nee
+persons (Schema)
+focus_area
+Focus Area
+select
+Nee
+CAT_TRN_FOC
+intensity
+Intensity
+select
+Nee
+CAT_TRN_INT
+fatigue_level
+Fatigue Level (1-100)
+number
+Nee
+attribute_changes
+Attribute Changes
+json_array
+Nee
+2. Referentie Categorielijsten (CAT_...)
+CAT_POS_TYP: Speler Positie
+ID
+Label
+-1
+[None]
+0
+Goalie
+1
+Left Defence
+2
+Right Defence
+3
+Left Wing
+4
+Centre
+5
+Right Wing
+6
+Defence
+7
+Forward
+CAT_PLR_ROL: Speler Taak
+ID
+Label
+-1
+[None]
+0
+Goalie: Mixed
+1
+Goalie: Butterfly
+2
+Goalie: Stand-up
+3
+Goalie: Hybrid/Unorthodox
+4
+Defenceman: Offensive
+5
+Defenceman: Offensive (finesse)
+6
+Defenceman: Offensive (physical)
+7
+Defenceman: Pointman
+8
+Defenceman: Pointman (finesse)
+9
+Defenceman: Pointman (physical)
+10
+Defenceman: Playmaker
+11
+Defenceman: Playmaker (finesse)
+12
+Defenceman: Playmaker (physical)
+13
+Defenceman: Defensive
+14
+Defenceman: Defensive (finesse)
+15
+Defenceman: Defensive (physical)
+16
+Defenceman: Standard
+17
+Defenceman: Rugged
+18
+Defenceman: Enforcer
+19
+Winger: Defensive
+20
+Winger: Defensive (finesse)
+21
+Winger: Defensive (physical)
+22
+Winger: Sniper
+23
+Winger: Sniper (finesse)
+24
+Winger: Sniper (physical)
+25
+Winger: Playmaker
+26
+Winger: Playmaker (finesse)
+27
+Winger: Playmaker (physical)
+28
+Winger: All around
+29
+Winger: Finesse
+30
+Winger: Grinder
+31
+Winger: Power forward
+32
+Winger: Enforcer
+33
+Centre: Defensive
+34
+Centre: Defensive (finesse)
+35
+Centre: Defensive (physical)
+36
+Centre: Sniper
+37
+Centre: Sniper (finesse)
+38
+Centre: Sniper (physical)
+39
+Centre: Playmaker
+40
+Centre: Playmaker (finesse)
+41
+Centre: Playmaker (physical)
+42
+Centre: All around
+43
+Centre: Finesse
+44
+Centre: Grinder
+45
+Centre: Power forward
+46
+Centre: Enforcer
+CAT_JOB: Functie
+ID
+Label
+-1
+[Invalid job for nation]
+0
+[Invalid job for club]
+1
+Chairman
+2
+Managing Director
+3
+President
+4
+Director of Personnel
+5
+General Manager
+6
+Assistant GM
+7
+Head Coach
+8
+Coach
+9
+Scout
+10
+Physio
+11
+Player
+12
+Player/Coach
+13
+Media Pundit
+14
+Retired
+15
+Head Scout (Saved Game Only)
+16
+GM/Head Coach
+CAT_STF_CLS: Persoon Klassificatie
+ID
+Label
+0
+[Invalid]
+1
+Non-player
+2
+Player
+3
+Player/Non-player
+4
+Human GM (Saved Game Only)
+5
+Spare Non-Player (Saved Game Only)
+6
+Spare Player (Saved Game Only)
+CAT_HND: Onderste Hand
+ID
+Label
+-1
+[None]
+0
+Right
+1
+Left
+CAT_PRO_STA: Spelers Niveau
+ID
+Label
+0
+[None]
+1
+Professional
+2
+Semi-Professional
+3
+Amateur
+4
+Junior
+5
+National (Senior)
+6
+National (U20)
+CAT_CMP_TYP: Competitie Soort
+ID
+Label
+-1
+[Invalid]
+1
+Cup
+2
+League
+CAT_CMP_SCP: Competitie Scope
+ID
+Label
+1
+National
+2
+Continental
+4
+International
+CAT_CMP_CLS: Competitie Klassificatie
+ID
+Label
+-3
+- Not Set -
+-2
+- Extinct -
+-1
+[Invalid]
+0
+International Senior
+1
+International Junior
+2
+Domestic League
+3
+Domestic Cup
+4
+Domestic Major Junior
+5
+Domestic Junior
+6
+Domestic College
+7
+Domestic High School
+8
+Domestic All-star
+9
+Continental
+10
+Sub-competition (Conference / Division)
+CAT_RNK_SIZ: IJsvloer Oppervlakte
+ID
+Label
+1
+IIHF (61m x 30.5m)
+2
+NHL (61m x 26m)
+CAT_ICE_CND: IJsvloer Conditie
+ID
+Label
+1
+Excellent
+2
+Good
+3
+Poor
+4
+Very Poor
+CAT_FGT_PEN: Penalties Fighting
+ID
+Label
+0
+[None]
+1
+1 game = misconduct
+2
+2 game = misconduct
+3
+3 game = misconduct
+4
+3 game = misconduct (UK Elite League)
+CAT_MSC_ACC: Accumulatie
+ID
+Label
+0
+[None]
+1
+Standard accumulation
+2
+Incremental accumulation
+3
+Multiplied accumulation
+CAT_SAL_CAP: Financieel Salaris Plafond
+ID
+Label
+-1
+[Invalid]
+0
+Cumulative over the season
+1
+Yearly wages capped nominally
+2
+Weekly wages capped nominally
+CAT_PRZ_MON: Prijzengeld
+ID
+Label
+1
+Normal (scaled)
+2
+[None]
+3
+First placed only
+4
+Top four (equal amounts)
+5
+Euro Champions Cup
+CAT_WIN_PCT: Winst Percentage
+ID
+Label
+0
+Wins divided by GP
+1
+Points divided by total possible points
+2
+Points divided by (2 x GP)
+CAT_SRT_RUL: Klassement Tie Breaker
+ID
+Label
+0
+No Rule
+1
+Goal Difference
+2
+Goals For
+3
+Games Won
+4
+Own Match
+5
+Goals For Away
+6
+Division Winners
+7
+Division Top Three
+8
+Regulation and Overtime Wins
+9
+Do Not Sort
+10
+UK Conference Winners
+11
+UNKNOWN SORT RULE
+12
+Regulation Wins Only
+13
+Points Pct
+CAT_FIN_INC: Financieel Inkomen
+ID
+Label
+1
+Gate Receipts
+2
+Merchandise
+3
+TV Rights
+4
+Prize Money
+CAT_FIN_EXP: Financieel Uitgaven
+ID
+Label
+1
+Player Salaries
+2
+Staff Salaries
+3
+Travel
+4
+Arena Maintenance
+CAT_TRN_INT: Training Intensiteit
+ID
+Label
+1
+Rest
+2
+Light
+3
+Normal
+4
+Intense
+CAT_TRN_FOC: Training Type
+ID
+Label
+1
+Conditioning
+2
+Skating
+3
+Shooting
+4
+Tactics
+5
+Goaltending
+NAME_EXTRA_FLAGS: Naam Extra Flag
+ID
+Label
+0
+- No Flags Set -
+1
+Invalid
+2
+Female
+STAFF_EXTRA_FLAGS: Persoon Extra Flags
+ID
+Label
+0
+- No Flags Set -
+1
+Faked person
+2
+Extinct person
+3
+Extra player from game start
+4
+Extra non-player from game start
+5
+Human manager
+MATCH_RULES_FLAGS: Wedstrijd Regels
+ID
+Label
+1
+No red line
+2
+Automatic icing
+3
+No away goals
+4
+Replay
+5
+Overtime: 4 On 4
+6
+Overtime: 1x period (5 minutes)
+7
+Overtime: 1x period (10 minutes)
+8
+Overtime: 1x period (20 minutes)
+9
+Overtime: (20 minute periods until a winner)
+10
+Shoot out: 5 shooters (no repeat)
+11
+Shoot out: 3 shooters (no repeat)
+12
+Shoot out: 3 shooters (can repeat shooters in sudden death)
+13
+Shoot out: 1-by-1 sudden death
+14
+Hybrid icing
+15
+Cannot change after icing
+16
+Overtime: 7 minutes (4 on 4 and 3 on 3)
+17
+Overtime: 3 on 3
+BASIC_RULES_FLAGS: Settings Flags
+ID
+Label
+0
+Has All Star Skills Comp
+1
+Conference Based All Star Game
+2
+Skip Olympic Years
+3
+Uses Only Winner For History
+4
+Uses Top Two Places For History
+5
+Uses Medals For Top Places
+6
+Declares Regular Season Champion
+7
+Init Stages Hosted By Top Rank Club
+8
+Skip Random Years
+9
+Two Years Between Comps
+10
+Four Years Between Comps
+11
+Uses Extra Teams For Late Draw
+12
+Comp Season Does Not Overlap
+13
+Comp Uses Intra Conference Schedule
+14
+Comp Uses Real Schedule Template
+15
+Same Teams In Multiple Tournaments
+16
+Pick Host From Linked Comps
+17
+Host Club Nation Against World All Star Game
+18
+Clubs divided geographically
+19
+Standings Separate OT And SO Losses
+20
+Captain Teams And Pickup Style All Star Game
+21
+Comp Has Additional Initial Rounds
+22
+Init Stages Hosted By Random Club
+23
+Participating Teams Rotate Between Stages
+24
+Each Stage Hosted By Random Club
+25
+Additional Inter Conference Rounds In Overall Stage
+26
+Uses Two Winners For History
+27
+Clubs Use Financial Data For Club Nation
+28
+Sort Participating Teams For Initial Stages East To West
+29
+Dont Skip First Random Year
+30
+Enter Clubs Based On Continental Flags To Base List
+31
+Extra Teams To Later Stages From Base List
+EXTRA_RULE_TYPE: Extra Rule Type
+ID
+Label
+0
+[Invalid]
+1
+Award minimum age
+2
+Award maximum age
+3
+Award minimum games played in season
+4
+Award maximum games played in career
+5
+Rookie max age
+6
+Rookie max age cut off day
+LANGUAGE: Taal
+ID
+Label
+0
+[None]
+1
+Albanian (1)
+2
+Arabic
+3
+Bulgarian
+4
+Chinese
+5
+Croatian
+6
+Czech
+7
+Dutch
+8
+English
+9
+Finnish
+10
+French
+11
+German
+12
+Greek
+13
+Hebrew
+14
+Hungarian
+15
+Italian
+16
+Japanese
+17
+Korean
+18
+Polish
+19
+Portuguese
+20
+Romanian
+21
+Russian
+22
+Norwegian
+23
+Serbian
+24
+Spanish
+25
+Turkish
+26
+Burmese
+27
+Malay
+28
+Persian
+29
+Slovak
+30
+Swedish
+31
+Icelandic
+32
+Danish
+33
+Afrikaans
+34
+Albanian (2)
+35
+Amharic
+36
+Armenian
+37
+Azeri
+38
+Bangla
+39
+Estonian
+40
+Georgian
+41
+Hindi
+42
+Javanese
+43
+Khmer
+44
+Kyrgyz
+45
+Lao
+46
+Latvian
+47
+Letburgesch
+48
+Lithuanian
+49
+Macedonian
+50
+Malagasy
+51
+Maltese
+52
+Sinhalese
+53
+Slovenian
+54
+Somali
+55
+Swahili
+56
+Tajik
+57
+Tamil
+58
+Thai
+59
+Uzbek
+60
+Vietnamese
+61
+Mongol
+62
+Bosnian
+63
+Ukrainian
+64
+Zulu
+AWARD_TYPE: Accolade (Prijzen)
+ID
+Label
+0
+[None]
+1
+Most points
+2
+Most goals
+3
+Best player overall
+4
+Players player of the year
+5
+Best defenseman
+6
+Best goalie
+7
+Best goalie tandem
+8
+Best goalie save pct
+9
+Best defensive forward
+10
+Best offensive defenseman
+11
+Best forward
+12
+Best rookie
+13
+Best scholastic player
+14
+Best overage player
+15
+Most points in playoffs
+16
+Best center
+17
+Best winger
+18
+Offensive rookie of the year
+19
+Defensive rookie of the year
+20
+Best defensive defenseman
+21
+Most three star selections
+22
+Best manager
+23
+Best defensive player
+24
+Best domestic player
+25
+Gentleman player
+26
+Best leader
+27
+Humanitarian
+28
+Best coach
+29
+Best plusminus
+30
+MVP
+31
+Playoff MVP
+32
+All star MVP
+33
+Player of the week
+34
+Player of the month
+35
+Rookie of the month
+36
+Offensive player of the week
+37
+Defensive player of the week
+38
+Dedication to hockey
+39
+Offensive player of the month
+40
+Defensive player of the month
+41
+First all-star team
+42
+Second all-star team
+43
+Third all-star team
+44
+Rookie all-star team
+45
+Goalie of the week
+46
+Defenseman of the week
+47
+Forward of the week
+48
+Rookie of the week
+49
+Most points by a defenseman
+50
+Most goals in playoffs
+ROUND_TYPE: Ronde Type
+ID
+Label
+0
+No Round Name
+1
+Replay 1
+2
+Replay 2
+3
+Game 1 / Leg 1
+4
+Game 2 / Leg 2
+5
+Game 3 / Decider
+6
+Game 4
+7
+Game 5
+8
+Game 6
+9
+Game 7
+10
+First Round
+20
+Second Round
+30
+Third Round
+120
+Quarter Finals
+130
+Semi Finals
+140
+Third Place Playoff
+150
+Final
+160
+Playoff
+170
+Playoff Final
+180
+Playoff Semi Final
+190
+Playout
+200
+Qualifying Round
+210
+Preliminary Round
+220
+Promotion Final
+230
+First Qualifying Phase
+240
+Second Qualifying Phase
+250
+Third Qualifying Phase
+STAGE_TYPE: Stage Type
+ID
+Label
+0
+No Stage Name
+100
+International League
+200
+Domestic League
+300
+Group Stage
+800
+Promotion
+900
+Relegation Group
+1000
+Relegation Playoff
+1100
+Promotion Playoff
+1200
+Championship
+1300
+Conference
+1400
+Upper League
+1500
+Lower League
+1600
+Relegation League
+1700
+Conference Playoffs
+1800
+Preliminary Group
+1900
+Final Group
+2000
+Qualifying Group
+2100
+Overall Standings
+2200
+Playoff League
+2300
+Regular Season
+2400
+Reg Season Continued
+2500
+Playoffs
+2600
+Division
+2700
+Division Playoffs
+2800
+Playouts
+2900
+Playout League
+APPROXIMATE_REGION: Regio
+ID
+Label
+0
+[None]
+1
+Africa (Central)
+2
+Asia
+3
+Europe (East)
+4
+Europe (UK & Ireland)
+5
+Canada
+6
+Caribbean
+7
+Central America
+8
+Europe (Central)
+9
+Europe (Czech Republic)
+10
+Europe (Balkans)
+11
+Europe (Finland)
+12
+Europe (Germany)
+13
+Asia (East)
+14
+Middle East
+15
+Africa (North)
+16
+Oceania
+17
+Russia (West)
+18
+Europe (Scandinavia)
+19
+Russia (East)
+20
+South America
+21
+Africa (South)
+22
+Europe (Sweden)
+23
+North America
+24
+Europe (West)
+REGION_ACTUAL: Regione
+ID
+Label
+0
+[None]
+1
+Africa
+2
+Asia
+3
+Caribbean
+4
+Central America
+5
+Europe (Central)
+6
+Europe (East)
+7
+Middle East
+8
+Africa (North)
+9
+North America
+10
+Oceania
+11
+Europe (Scandinavia)
+12
+South America
+13
+Europe (South)
+14
+Europe (UK & Ireland)
+AFFILIATION_TYPE: Affiliatie Soort
+ID
+Label
+-1
+[None]
+0
+Farm (Primary)
+1
+Farm (Secondary)
+2
+Farm (Other)
+3
+Junior (Primary)
+4
+Junior (Secondary)
+5
+Junior (Other)
+AFFILIATION_DEPENDENCY: Affiliatie
+ID
+Label
+-1
+[None]
+0
+Independent
+1
+Semi-independent
+2
+Dependent
+DAY: Dag
+ID
+Label
+-1
+[None]
+0
+Monday
+1
+Tuesday
+2
+Wednesday
+3
+Thursday
+4
+Friday
+5
+Saturday
+6
+Sunday
+TACTIC: Tactic
+ID
+Label
+-1
+[DO NOT USE (-1)]
+0
+Unknown (0)
+1
+Unknown (1)
+2
+Unknown (2)
+3
+Unknown (3)
+4
+Unknown (4)
+5
+Unknown (5)
+6
+Unknown (6)
+7
+Unknown (7)
+8
+Unknown (8)
+9
+Unknown (9)
+10
+Unknown (10)
+11
+Unknown (11)
+12
+Unknown (12)
+13
+Unknown (13)
+14
+Unknown (14)
+15
+Unknown (15)
+16
+Unknown (16)
+EXTRA_MATCH_RULES: Extra Wedstrijd Settings
+ID
+Label
+1
+Use trapezoid
+2
+Award goal for shootout winning goal
+ROUND_RULES: Ronde Regels
+ID
+Label
+1
+Do Not Allow Same Nation Games
+2
+Lower Division Team Home In First Leg
+3
+Lower Seeded Team Home In First Leg
+4
+Higher Seeded Team Home In First Leg
+5
+Lower Positioned Team Home In First Leg
+6
+Two Divisional Brackets
+7
+Alternate Home Away Games
+8
+Highest Against Lowest Matchup
+9
+Loser Continues Through
+10
+Tv Dates Exist
+11
+Fixed Draw
+12
+Seeded Draw
+13
+Two Leg Higher Seed Wins
+14
+Two Leg Home Win
+15
+Two Leg Away Win
+16
+Hockey Best Of Three
+17
+Hockey Best Of Five
+18
+Hockey Best Of Seven
+19
+Three Divisional Leaders In Bracket
+20
+Allow Random Cup Seeds
+21
+Team With Better Season Record At Home
+TEAM_PICKING_RULES: Team Picking Rules
+ID
+Label
+0
+[None]
+1
+From Basic Rules List
+2
+From Basic Rules List By Conference
+3
+From Basic Rules List By Division
+4
+From Database By Base Comp
+5
+From Nation By Reputation
+6
+From National Teams By Reputation
+7
+From National Teams By Finish
+8
+From Prev Stages Use One Stage
+9
+From Prev Stages Seeded
+10
+From Prev Stages Top Bye
+11
+From National Teams By Ranking
+12
+From Prev Stages Intra Group First Round
+13
+From Prev Stages Special Sort Olympics
+14
+From Prev Stages Special Sort Regular Season Pts
+15
+From Lower League Playoff Winners
+16
+From First Playoff Stage Losers
+17
+From Other Conference Last Top Playoff Spots
+18
+From Linked Comp Champions
+19
+From Lower League Top Playoff Places
+20
+From Lower League Promotion Places
+21
+From Extra Stage Specified
+22
+Give Initial Bonus Points
+23
+From Prev Stages Bottom Bye
+24
+From Prev Stages Split Teams And Ignore Already Picked For Concurrent Stages
+25
+Retain Previous Stage Points And Goal Diff
+26
+Retain Previous Stage Points
+27
+Give Initial Bonus Points From 4 Down
+28
+From Prev Stages Seeded In Order Of Stages To One Pool
+29
+Compare Top Playoff Spot With Previous Divison
+REPLAY_RULES: Wedstrijd Regels (Overnieuw)
+ID
+Label
+3
+No away goals
+5
+Overtime: 4 On 4
+6
+Overtime: 1x period (5 minutes)
+7
+Overtime: 1x period (10 minutes)
+8
+Overtime: 1x period (20 minutes)
+9
+Overtime: (20 minute periods until a winner)
+10
+Shoot out: 5 shooters (no repeat)
+11
+Shoot out: 3 shooters (no repeat)
+12
+Shoot out: 3 shooters (can repeat shooters in sudden death)
+13
+Shoot out: 1-by-1 sudden death
+16
+Overtime: 7 minutes (4 on 4 and 3 on 3)
+17
+Overtime: 3 on 3
+CLUB_VALUATION: Club Beoordeling
+ID
+Label
+-1
+[None]
+0
+Unknown (0)
+1
+Unknown (1)
+2
+Unknown (2)
+3
+Unknown (3)
+4
+Unknown (4)
+5
+Unknown (5)
+GENDER: Gender
+ID
+Label
+-1
+[None]
+-51
+Default Nation (-51)
+0
+Default (0)
+1
+Unknown (1)
+2
+Unknown (2)
+3
+Unknown (3)
+4
+Unknown (4)
+5
+Unknown (5)
+GROUP: Groep
+ID
+Label
+0
+No Group Name
+1
+Group A
+2
+Group B
+3
+Group C
+4
+Group D
+5
+Group E
+6
+Group F
+7
+Group G
+8
+Group H
+9
+Group I
+10
+Group J
+11
+Group K
+12
+Group L
+13
+Group M
+14
+Group N
+15
+Group O
+16
+Group P
+50
+Group 1
+51
+Group 2
+52
+Group 3
+53
+Group 4
+54
+Group 5
+55
+Group 6
+56
+Group 7
+57
+Group 8
+58
+Northern Section
+59
+Southern Section
+60
+Western Section
+61
+Eastern Section
+62
+Generic 1
+63
+Generic 2
+GROUP_MEMBERSHIP: Groupslid Status
+ID
+Label
+0
+[None]
+1
+No
+2
+Yes
+IIHF_JUNIOR_DIVISION: IIHF Junior Divisie
+ID
+Label
+0
+[None]
+1
+World Championships
+2
+Division 1
+3
+Division 2
+IIHF_SENIOR_DIVISION: IIHF Senior Divisie
+ID
+Label
+0
+[None]
+1
+World Championships
+2
+Division 1A
+3
+Division 1B
+4
+Division 2A
+5
+Division 2B
+6
+Division 3
+FATE_RULES: Resultaat
+ID
+Label
+0
+Champions
+1
+Promotion from stage
+2
+Qualified for next competition
+3
+Qualified for next stage
+4
+Check for no fate
+5
+No random dates
+6
+Relegation from stage
+7
+Regular season champions
+FATE_TO_DRAW_FROM: Resultaten Pool
+ID
+Label
+-1
+[None]
+0
+League: Promotion places
+1
+League: Playoff (top) places
+2
+League: Playoff (bottom) places
+3
+League: Relegation end place
+99
+Cup: Knocked out
+100
+Cup: Still in
+101
+Cup: Winner
+102
+Cup: Runners up
+103
+Cup: Third place
+104
+Cup: Fourth place
+TRANSFER_RULES_FLAGS: Transfer Regels
+ID
+Label
+1
+Allow junior contracted players for main team
+2
+Allow loans outside of transfer windows
+3
+Free agents only allowed to sign until last window
+4
+Junior eligible players cannot be recalled during season
+5
+Signing bonus counts against cap
+6
+Disallow performance bonuses
+7
+Allow entry level performance bonuses
+8
+Restricted free agents dont count on reserve list
+9
+Allow yearly salary changes
+10
+Limit yearly salary changes
+11
+Contracts are guaranteed
+12
+Overage limit based on exact age
+13
+No training camps
+14
+Junior eligible players with rights cannot be signed
+TRANSFER_SYSTEM_TYPE: Transfer Systeem Type
+ID
+Label
+0
+North American
+1
+IIHF (no trades)
+2
+IIHF (trades permitted)
+ARENA_RULES: Accomodatie Settings
+ID
+Label
+-1
+Invalid
+0
+Home team arena
+1
+[None]
+2
+Not national arena
+4
+National arena
+8
+Nearby arena
+16
+Host arena
+32
+Arena size to suit teams
+64
+Arena 1
+128
+Arena 2
+256
+Arena 3
+512
+Arena 4
+1024
+Arena 5
+2048
+Arena 6
+4096
+Arena 7
+8192
+Arena 8
+16384
+Arena 9
+CONTINENTAL_LICENCE: Licentie
+ID
+Label
+-1
+[None]
+0
+CHL A Licence
+1
+CHL B Licence
+2
+CHL C Licence
+3
+Lower A Licence
+4
+Lower B Licence
+5
+Lower C Licence
+GAME_IMPORTANCE: Wedstrijd Belang
+ID
+Label
+0
+[None]
+1
+Major Importance
+2
+Normal Importance
+3
+Minor Importance
+4
+No Hockey
+MONTH: Maand
+ID
+Label
+-1
+[None]
+0
+January
+1
+February
+2
+March
+3
+April
+4
+May
+5
+June
+6
+July
+7
+August
+8
+September
+9
+October
+10
+November
+11
+December
+SQUAD_PLAYING: Team Opstelling
+ID
+Label
+-1
+[Invalid]
+0
+Unknown (0)
+1
+Unknown (1)
+2
+Unknown (2)
+3
+Unknown (3)
+4
+Unknown (4)
+5
+Unknown (5)
+SQUAD_SELECTED: Team Selectie
+ID
+Label
+0
+[Invalid]
+1
+Club Senior Squad
+2
+Club Reserve Squad
+4
+Nation Main Squad
+8
+Nation Reserve Squad
+STATS_SCOPE: Stats Scope
+ID
+Label
+1
+League
+2
+Playoff
+3
+Playout
+4
+Exhibition
+5
+Continental
+6
+International
+7
+Overall
+TIME_OF_DAY: Tijdstip
+ID
+Label
+-1
+[None]
+0
+Morning
+1
+Afternoon
+2
+Evening
+4
+[Invalid]
+TV_TYPE: Uitzending
+ID
+Label
+-1
+[None]
+0
+Regional
+1
+National
+2
+Satellite
+3
+Silent (no message)
+4
+Do not move any matches
+COMP_SELECTED_FLAG: Competitie Vlag
+ID
+Label
+-1
+[None]
+0
+Unknown (0)
+1
+Unknown (1)
+2
+Unknown (2)
+3
+Unknown (3)
+4
+Unknown (4)
+5
+Unknown (5)
+LEAGUE_SELECTED: Competitie Geselecteerd
+ID
+Label
+0
+[None]
+1
+Selected
+2
+Enhanced
+4
+Selected (All Divisions)
+8
+Enhanced (Start Date)
+DECLARED_NATION: Nationaliteit Extra
+ID
+Label
+-1
+[Invalid]
+0
+[None]
+1
+Primary Nationality
+2
+Secondary Nationality
+JOB_LEVEL: Persoon Klassificatie Niveau
+ID
+Label
+-1
+[None]
+0
+Unknown (0)
+1
+Unknown (1)
+CAT_RUL_BOD: Bestuurlijke Invloed
+ID
+Label
+0
+[None]
+1
+International
+2
+Continental
+3
+National
+4
+Domestic League
+RULING_BODY_FLAGS: Bestuurlijk Orgaan Flags
+ID
+Label
+0
+- No Flags Set -
+1
+Automatic match ban for attempt to injure
+2
+Automatic match ban for physical abuse of officials
+3
+Automatic match ban for gross misconduct
+4
+Board reviews all match penalties
+5
+Board reviews all game misconducts
+JUNIOR_PREFERENCE: Junior Preference
+ID
+Label
+-1
+[None]
+0
+College
+1
+Major Junior
+2
+Europe
+DEVELOPMENT_STATE: Development State
+ID
+Label
+0
+[None]
+1
+Developed World
+2
+Developing World
+3
+Third World
+17e078d6-9991-4c4d-9ab7-651a42251aa3: Stick Merk
+ID
+Label
+bauer_
+Bauer
+ccm
+CCM
+blackout_hockey
+Blackout Hockey
+warrior
+Warrior
+sherwood
+Sherwood
+true
+True
+fischer
+Fischer
+easton
+Easton
+tps
+TPS
+koho
+Koho
+overige
+Overige
+dc78a62c-5a23-4656-b465-c500cb6348cf: Stick Flex
+ID
+Label
+20
+20
+25
+25
+30
+30
+35
+35
+40
+40
+45
+45
+50
+50
+55
+55
+60
+60
+65
+65
+67
+67
+70
+70
+75
+75
+77
+77
+80
+80
+85
+85
+87
+87
+90
+90
+95
+95
+100
+100
+105
+105
+110
+110
+115
+115
+120
+120
+125
+125
+333fe324-d161-4253-a058-49e91e04e090: Stick Blad-Curve
+ID
+Label
+p02
+P02
+p08
+P08
+pm9
+PM9
+p14
+P14
+p28
+P28
+p28m
+P28M
+p77
+P77
+p86
+P86
+p88
+P88
+p90tm
+P90TM
+p91
+P91
+p92
+P92
+p92m
+P92M
+c51cc670-8f3f-429e-a900-e5908c84ba4a: Stick Klasse
+ID
+Label
+jeugd
+Jeugd
+junior
+Junior
+intermediate
+Intermediate
+women
+Women
+senior
+Senior
+70dac729-6439-40ae-91b0-cab965685e1b: Stick Kick-Point
+ID
+Label
+low_
+Low
+hybrid
+Hybrid
+mid
+Mid
+high
+High
+ad6e7664-1de5-4590-93c2-8f3348a05aa2: Stick Prestatieklasse
+ID
+Label
+beginner
+Beginner
+recreatief
+Recreatief
+geavanceerd
+Geavanceerd
+pro_stock
+Pro-Stock
+9586ad60-85f2-4028-9946-ae9037a56c8d: Stick Gewichtsklasse
+ID
+Label
+ultra_lightweight
+Ultra Lightweight
+featherweight
+Featherweight
+proweight
+Proweight
+welterweight
+Welterweight
+middleweight
+Middleweight
+cruiserweight
+Cruiserweight
+61e77be0-6eb4-422a-a2cd-15814b36586a: Stick Serie
+ID
+Label
+nexus__bauer_
+Nexus (Bauer)
+supreme__bauer_
+Supreme (Bauer)
+innovation_series__bauer_
+Innovation Series (Bauer)
+vapor__bauer_
+Vapor (Bauer)
+tacks__ccm_
+Tacks (CCM)
+jetspeed__ccm_
+Jetspeed (CCM)
+ribcor_trigger__ccm_
+RibCor Trigger (CCM)
+innovation_series__ccm_
+Innovation Series (CCM)
+novium__warrior_
+Novium (Warrior)
+covert__warrior_
+Covert (Warrior)
+alpha__warrior_
+Alpha (Warrior)
+code__sherwood_
+CODE (Sherwood)
+rekker__sherwood_
+Rekker (Sherwood)
+hzrdus__true_
+Hzrdus (TRUE)
+catalyst__true_
+Catalyst (TRUE)
+skyline__kyc_
+Skyline (KYC)
+phantom__kyc_
+Phantom (KYC)
+bastion__blackout_hockey_
+Bastion (Blackout Hockey)
+cataphract__blackout_hockey_
+Cataphract (Blackout Hockey)
+oilslick__blackout_hockey_
+OilSlick (Blackout Hockey)
+select_series__blackout_hockey_
+Select Series (Blackout Hockey)
+anders__low_kick_
+Anders (Low-Kick)
+anders__hybrid_kick_
+Anders (Hybrid-Kick)
+anders__mid_kick_
+Anders (Mid-Kick)
+anders__high_kick_
+Anders (High-Kick)
+87fe335a-091e-41b8-b1ac-cfa2d1505b09: Stick 3D Grip
+ID
+Label
+geen_
+Geen
+helemaal_bedekt
+Helemaal bedekt
+zuurstok
+Zuurstok
+vissengraat
+Vissengraat
+rechte_hoeken
+Rechte hoeken
+diagonale_hoeken
+Diagonale hoeken
+1f295359-5383-464c-aea5-6f42899b36f3: Stick Blad-Textuur
+ID
+Label
+mat
+Mat
+glanzend
+Glanzend
+geschuurd
+Geschuurd
+3d_textuur
+3D Textuur
+0cf6985b-a1bf-4e34-ade3-de593b09908f: Stick Shaft-Type
+ID
+Label
+goalie
+Goalie
+goalie_trigger
+Goalie Trigger
+junior_
+Junior
+ovaal
+Ovaal
+micro__concaaf
+(Micro) Concaaf
+penta__vijfhoekig
+Penta (Vijfhoekig)
+8a3cb45d-9611-43e2-b66d-81149e3d2a0f: Stick Shaft-Textuur
+ID
+Label
+mat
+Mat
+glanzend
+Glanzend
+mat_met_griplaag
+Mat met Griplaag
+glanzend_met_griplaag
+Glanzend met Griplaag
+superglanzend_met_griplaag
+Superglanzend met Griplaag
+d02bb5cb-5252-47c3-813d-947ee537a6e7: Stick Design
+ID
+Label
+true_blackout__geen_graphics_
+True Blackout (Geen graphics)
+custom_design
+Custom Design
+team_design
+Team Design
+CAT_REG_APP: Approximate Region
+ID
+Label
+0
+[None]
+1
+Africa (Central)
+15
+Africa (North)
+21
+Africa (South)
+2
+Asia
+13
+Asia (East)
+5
+Canada
+6
+Caribbean
+7
+Central America
+10
+Europe (Balkans)
+8
+Europe (Central)
+9
+Europe (Czech Republic)
+3
+Europe (East)
+11
+Europe (Finland)
+12
+Europe (Germany)
+18
+Europe (Scandinavia)
+22
+Europe (Sweden)
+4
+Europe (UK & Ireland)
+24
+Europe (West)
+14
+Middle East
+23
+North America
+16
+Oceania
+19
+Russia (East)
+17
+Russia (West)
+20
+South America
+CAT_REG_ACT: Region Actual
+ID
+Label
+0
+[None]
+1
+Africa
+8
+Africa (North)
+2
+Asia
+3
+Caribbean
+4
+Central America
+5
+Europe (Central)
+6
+Europe (East)
+11
+Europe (Scandinavia)
+13
+Europe (South)
+14
+Europe (UK & Ireland)
+7
+Middle East
+9
+North America
+10
+Oceania
+12
+South America
+CAT_DEV_STA: Development State
+ID
+Label
+0
+[None]
+1
+Developed World
+2
+Developing World
+3
+Third World
+CAT_AFF_TYP: Affiliation Type
+ID
+Label
+-1
+[None]
+0
+Farm (Primary)
+1
+Farm (Secondary)
+2
+Farm (Other)
+3
+Junior (Primary)
+4
+Junior (Secondary)
+5
+Junior (Other)
+CAT_AFF_DEP: Affiliation Dependency
+ID
+Label
+-1
+[None]
+0
+Independent
+1
+Semi-independent
+2
+Dependent
+3. Extra Regel Definities (extra_rule_type.txt)
+Regel ID
+Omschrijving (Waarde)
+Datatype Validatie
+0
+[Invalid]
+1
+Award minimum age
+2
+Award maximum age
+3
+Award minimum games played in season
+4
+Award maximum games played in career
+5
+Rookie max age
+6
+Rookie max age cut off day
+DAY_MONTH
+7
+Rookie max games before season
+8
+Rookie max games in each previous two seasons
+9
+Contract player min yearly wage
+10
+Contract player min weekly wage
+11
+Contract player max yearly wage for entry level
+12
+Contract player max weekly wage for entry level
+13
+Contract player max yearly wage
+14
+Contract player max weekly wage
+15
+Contract max years
+16
+Contract entry level age 1
+17
+Contract entry level length 1
+18
+Contract entry level age 2
+19
+Contract entry level length 2
+20
+Contract entry level age 3
+21
+Contract entry level length 3
+22
+Veteran min games for skater
+23
+Veteran min games for goalie
+24
+Veteran limit of games last season for re entry waivers
+25
+Veteran limit of games last two seasons for re entry waivers
+26
+Development max games for skater
+27
+Development max games for goalie
+28
+Development max age
+29
+Homegrown max age
+30
+Salary cap offseason start day
+DAY_MONTH
+31
+Salary cap offseason end day
+DAY_MONTH
+32
+Salary cap max percentage for one player wage
+33
+Roster limit start day
+DAY_MONTH
+34
+Roster limit end day
+DAY_MONTH
+35
+Roster offseason limit
+36
+Restricted fa signing deadline day
+DAY_MONTH
+37
+Fixture rule min underaged players
+38
+Fixture rule max underaged players
+39
+Fixture rule underaged players age limit
+40
+Fixture rule max overaged players
+41
+Fixture rule min homegrown players
+42
+Fixture rule min rookie players
+43
+Fixture rule min development players
+44
+Fixture rule max veteran players
+45
+Training camp start offset from league start
+46
+Rookie max professional games before season
+47
+Rookie max games before season in nhl
+48
+Contract min age
+49
+Contract min age north american player
+50
+Contract min age cutoff date
+DAY_MONTH
+51
+Veteran loan players exempt under age
+52
+Contract player min yearly wage for entry level
+53
+Contract player min weekly wage for entry level
+54
+Salary cap loan player yearly wage for cap
+55
+Salary cap loan player weekly wage for cap
+56
+Fixture rule max non eec players
+57
+Fixture rule max foreign players
+58
+Salary cap offseason extra allowance pct
+59
+Fixture rule min domestic players
+60
+Fixture rule min domestic players for foreign teams
+61
+Fixture rule max foreign players for domestic teams
+62
+Free agency max age for restricted free agency
+63
+Free agency skater games limit for accruing a season towards ufa
+64
+Free agency goalie games limit for accruing a season towards ufa
+65
+Free agency ufa group three absolute season limit
+66
+Free agency ufa group three absolute age limit
+67
+Free agency ufa group three lower season limit with age
+68
+Free agency ufa group three age limit for lower season limit
+69
+Free agency ufa group five season limit below average wage
+70
+Free agency ufa group six season limit
+71
+Free agency ufa group six age limit
+72
+Free agency ufa group goalie games limit
+73
+Free agency ufa group skater games limit
+74
+Contract games limit for sliding entry level contract u20
+75
+Waivers league uses waiver rules
+BOOL
+76
+Waivers re entry waivers minor league salary limit
+77
+Waivers offseason career games limit for below average salary
+78
+Waivers first contract age 18 exempt years skater
+79
+Waivers first contract age 18 exempt games skater
+80
+Waivers first contract age 19 exempt years skater
+81
+Waivers first contract age 19 exempt games skater
+82
+Waivers first contract age 20 exempt years skater
+83
+Waivers first contract age 20 exempt games skater
+84
+Waivers first contract age 21 exempt years skater
+85
+Waivers first contract age 21 exempt games skater
+86
+Waivers first contract age 22 exempt years skater
+87
+Waivers first contract age 22 exempt games skater
+88
+Waivers first contract age 23 exempt years skater
+89
+Waivers first contract age 23 exempt games skater
+90
+Waivers first contract age 24 exempt years skater
+91
+Waivers first contract age 24 exempt games skater
+92
+Waivers first contract age 25 exempt years skater
+93
+Waivers first contract age 25 exempt games skater
+94
+Waivers first contract age 18 exempt years goalie
+95
+Waivers first contract age 18 exempt games goalie
+96
+Waivers first contract age 19 exempt years goalie
+97
+Waivers first contract age 19 exempt years goalie
+98
+Waivers first contract age 20 exempt years goalie
+99
+Waivers first contract age 20 exempt games goalie
+100
+Waivers first contract age 21 exempt years goalie
+101
+Waivers first contract age 21 exempt games goalie
+102
+Waivers first contract age 22 exempt years goalie
+103
+Waivers first contract age 22 exempt games goalie
+104
+Waivers first contract age 23 exempt years goalie
+105
+Waivers first contract age 23 exempt games goalie
+106
+Waivers first contract age 24 exempt years goalie
+107
+Waivers first contract age 24 exempt games goalie
+108
+Waivers first contract age 25 exempt years goalie
+109
+Waivers first contract age 25 exempt games goalie
+110
+Waivers general exempt years skater
+111
+Waivers general exempt games skater
+112
+Waivers general exempt years goalie
+113
+Waivers general exempt games goalie
+114
+Foreigners players from league participant nations do not count
+BOOL
+115
+Offer sheet compensation limit 3rd round pick
+116
+Offer sheet compensation limit 2nd round pick
+117
+Offer sheet compensation limit 1st and 3rd round pick
+118
+Offer sheet compensation limit 1st 2nd and 3rd round pick
+119
+Offer sheet compensation limit two 1st and 2nd and 3rd round pick
+120
+Offer sheet compensation limit four 1st round picks
+121
+Salary cap farmed wage max yearly limit
+122
+Foreign player rule uses imports
+BOOL
+123
+Homegrown max age for goalies
+124
+Affiliate movement only for domestic players
+BOOL
+125
+Affiliate movement max age limit
+126
+Affiliate movement max age limit for goalies
+127
+Transfers loans not allowed within same league
+BOOL
+128
+Transfers loans not allowed in league
+BOOL
+129
+Free agency rfa wage limit 1
+130
+Free agency rfa qualifying pct 1
+131
+Free agency rfa wage limit 2
+132
+Free agency rfa qualifying pct 2
+133
+Free agency rfa wage limit 3
+134
+Free agency rfa qualifying pct 3
+135
+Free agency rfa qualifying limits max age limit
+136
+Free agency rfa qualifying offer length
+137
+Free agency rfa compensation system
+BOOL
+138
+Draft eligibility based on team not nationality
+BOOL
+139
+Draft eligibility goalies not eligible
+BOOL
+140
+Contract wage change limit year to year pct
+141
+Contract wage change limit lowest to highest pct
+142
+Try outs players not allowed to attend during season
+BOOL
+143
+Contract disallowed team option clause
+BOOL
+144
+Contract disallowed player option clause
+BOOL
+145
+Contract disallowed foreign clause
+BOOL
+146
+Foreign players for domestic teams based on national team eligibility
+BOOL
+147
+Club limited to use natural domestic players only
+148
+-- Contract entry level requires two way clause --
+149
+-- Contract buyout bracket 1 age limit --
+150
+-- Contract buyout bracket 1 percentage cap hit --
+151
+-- Contract buyout bracket 2 age limit --
+152
+-- Contract buyout bracket 2 percentage cap hit --
+153
+-- Contract buyout apply salary adjustment on cap hit --
+154
+-- Contract buyout cap hit years multiplier --
+155
+-- Contract buyout do not allow negotiation --
+156
+Training camps closed to walk-ins by default
+BOOL
+157
+Allow two-way contracts
+BOOL
+158
+Two-way contracts mandatory under a defined age
+159
+Goalies exempt from foreign player rules
+BOOL
+160
+Players on two-way contracts exempt from waivers
+BOOL
+161
+Count players from league home nation as domestic for foreign based clubs
+BOOL
+162
+League overaged player allowance to only apply to players on last year of eligibility
+BOOL
+163
+Nation does not count as foreign [UID]
+UID
+164
+Maximum number of foreign goalies (all teams)
+165
+Maximum number of foreign goalies (domestic teams)
+166
+Minimum contract length
+167
+Draft minimum age (all players)
+168
+Draft age cut off date
+DAY_MONTH
+169
+Draft minimum age (domestic players) (overrides the 'All Players' setting)
+170
+Draft maximum age (all players)
+171
+Date of waiver draft (NHL only)
+DAY_MONTH
+172
+Disable draft lottery (applies only to drafts with a hardcoded lottery)
+BOOL
+173
+Disable participation to Olympics (North American leagues only)
+BOOL
+174
+Number of continental A licences
+175
+Number of continental B licences
+176
+Number of continental C licences
+177
+Candidate league for continental A licence [UID]
+UID
+178
+Candidate league for continental B licence [UID]
+UID
+179
+Candidate league for continental C licence [UID]
+UID
+180
+Team to receive automatic continental A licence [UID]
+UID
+181
+Non agreement nation for defected players relating to player rights [UID]
+UID

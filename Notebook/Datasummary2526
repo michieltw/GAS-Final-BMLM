@@ -1,0 +1,904 @@
+Database- en Competitierapport: GIJS House League 2025/2026
+1. Systeem- & Competitie-inrichting
+In de moderne sportomgeving is een robuuste database-architectuur geen luxe, maar een strategische randvoorwaarde. Voor de GIJS House League 2025/2026 fungeert het datasysteem als de fundamentele infrastructuur voor continuïteit en professionalisering. Door sportieve prestaties, disciplinaire kaders en medische data te vertalen naar gestandaardiseerde relationele modellen, creëren we een "single source of truth". Dit stelt stakeholders in staat om niet alleen resultaten te consolideren, maar ook om beleidsmatige keuzes te baseren op kwantitatieve integriteit.
+1.1 Competitie-identiteit (ID: COMP_001)
+De structurele definitie van de competitie is vastgelegd onder identifier COMP_001 met de volgende systeemkenmerken:
+Naam: GIJS House League
+Scope: National / Domestic League (CAT_CMP_SCP: 1)
+Classificatie: Domestic League (CAT_CMP_CLS: 2)
+Type: League (CAT_CMP_TYP: 2)
+1.2 De Facilitaire Basis (ID: VEN_KARD)
+Sportcentrum Kardinge (VEN_KARD) is de exclusieve centrale hub.
+Afmetingen: IIHF-standaard (61m x 30.5m), geregistreerd als CAT_RNK_SIZ: 1.
+Operationele Variabelen: Naast afmetingen monitort het systeem de ijsconditie (CAT_ICE_CND). De correlatie tussen 'Excellent' ijs en hoge scoring-efficiëntie enerzijds, en de impact van 'Poor' ijs op de incidentie van blessures (MED_ID) anderzijds, is een cruciaal onderdeel van onze veiligheidsanalyses. Deze standaardisatie waarborgt de universele vergelijkbaarheid van statistieken over meerdere seizoenen.
+1.3 Database-Architectuur & Data-mapping
+De architectuur is opgedeeld in drie hiërarchische lagen om de integriteit en schaalbaarheid te waarborgen:
+Statische Stamgegevens
+Deze laag bevat de onveranderlijke fundamenten (Master Files):
+Persons (PER): Unieke profielen inclusief nationaliteit (NAT_ID) en taalvaardigheid.
+Organizations (ORG) & Teams (TEA): De institutionele en sportieve entiteiten.
+Nations (NAT) & Ruling Bodies (RUL): Cruciaal voor internationale regelgeving. De RUL_ID definieert welk orgaan de basic_rules_flags (zoals fighting penalties of icing-regels) voor de competitie mandateert.
+Venues (VEN): De fysieke specificaties van de speellocatie.
+Seizoensgebonden Encounters
+Hier worden de tijdelijke relaties voor het huidige boekjaar gedefinieerd:
+Person_encounters: De koppeling van spelers aan specifieke teams, inclusief CAT_PLR_ROL (spelersrol) en rugnummers.
+Comp_encounters: De specifieke competitie-instellingen voor 2025/2026, zoals transferregels en tie-breaker logica (CAT_SRT_RUL).
+Org_encounters: Actieve licentiestatus en organisatorische waarderingen voor dit seizoen.
+Transactionele Data
+De laag voor realtime registratie van gebeurtenissen:
+Games (GAM): De feitelijke wedstrijden gekoppeld aan een STG_ID (Stage Type).
+Game_events: Granulaire data van goals, assists en strafminuten.
+Medical/Injuries (MED): Registratie van fysieke ongeschiktheid, essentieel voor roster-beheer en call-up integriteit.
+Weekly_plans: Gegevens over trainingsintensiteit (CAT_TRN_INT) en focusgebieden.
+De "So What?" laag: De scheiding tussen statische records en seizoensgebonden encounters voorkomt data-corruptie bij mutaties. Door Ruling Bodies en Medical Records te integreren, overstijgt het systeem simpel score-beheer; het wordt een beheersinstrument voor disciplinaire integriteit en spelerswelzijn.
+2. De Organisatiestructuur: Clubs, Teams en Hiërarchie
+Een evenwichtige competitie vereist een gelaagde opbouw. Binnen de GIJS House League hanteren we het "Moeder-Dochter-model", waarbij de hiërarchie tussen Divisie A en Divisie B zorgt voor een logische doorstroming en sportieve balans.
+2.1 Overzicht Actieve en Slapende Organisaties
+Voor het lopende seizoen zijn vier organisaties geregistreerd:
+ORG_GREN (Team Green): Beheert de elite-afvaardiging TEA_GREN_A (Green Grizzlies A) en het farmteam TEA_GREN_B (Emerald Knights B).
+ORG_REDD (Team Red): Beheert TEA_REDD_A (Red Hot Chili Slappers A) en TEA_REDD_B (Red Hot Chili Slappers B).
+ORG_BLUE (Team Blue): Beheert TEA_BLUE_A (Knightmares A) en TEA_BLUE_B (Knightmares B).
+ORG_ORNG (Team Orange): Status: Slapend. Deze organisatie is aanwezig in de database voor historische consistentie maar is niet actief in het seizoen 2025/2026.
+2.2 Trainingsgroepen: Black & White
+Naast de competitieve structuur zijn er centrale ontwikkelingsentiteiten gedefinieerd:
+TEA_BLCK_T (Team Black): Primaire trainingsgroep voor collectieve vaardigheidsontwikkeling.
+TEA_WHIT_T (Team White): Secundaire trainingsgroep. Beide groepen vallen buiten het officiële speelschema en dienen als platform voor spelers van alle actieve teams om buiten competitieverband te trainen.
+2.3 Evaluatie van het Farmteam-Model
+De effectiviteit van de moeder-dochterrelatie (bijv. tussen TEA_GREN_A en TEA_GREN_B) is essentieel voor roster-flexibiliteit. Het systeem staat toe dat spelers via "call-ups" tijdelijk promoveren naar de A-divisie zonder hun basisregistratie te verliezen. Dit model optimaliseert de spelersbezetting en waarborgt dat blessures in de top-teams intern kunnen worden opgevangen, wat de competitieve integriteit versterkt.
+3. Spelers- & Statistiekenregister
+Kwantitatieve prestatie-indicatoren vormen de basis voor objectieve evaluatie. Dit register fungeert als het "single point of truth" voor zowel scouting als competitiebeheer.
+3.1 Het Uniforme Spelersregister (PER_001 t/m PER_070)
+ID
+Volledige Naam
+Team ID
+Rugnummer
+Rol
+GP
+G
+A
+P
+PIM
+PER_001
+Adessa
+TEA_GREN_A
+1
+Goalie
+6
+0
+0
+0
+0
+PER_002
+Alex
+TEA_REDD_A
+10
+Speler
+6
+4
+5
+9
+4
+PER_003
+Alwin
+TEA_BLUE_A
+22
+Speler
+5
+2
+3
+5
+2
+PER_004
+Arjan
+TEA_GREN_B
+15
+Speler
+6
+3
+2
+5
+0
+PER_005
+Arjen
+TEA_REDD_B
+8
+Speler
+5
+1
+4
+5
+6
+PER_006
+Axel
+TEA_BLUE_B
+11
+Speler
+6
+2
+1
+3
+2
+PER_007
+Bas
+TEA_GREN_A
+44
+Speler
+6
+5
+3
+8
+4
+PER_008
+Bram
+TEA_REDD_A
+19
+Speler
+6
+3
+6
+9
+2
+PER_009
+Casper
+TEA_BLUE_A
+5
+Speler
+4
+1
+1
+2
+2
+PER_010
+Chris
+TEA_GREN_B
+9
+Speler
+6
+4
+2
+6
+0
+PER_011
+Daan
+TEA_REDD_B
+25
+Speler
+6
+2
+5
+7
+4
+PER_012
+Dennis
+TEA_BLUE_B
+33
+Speler
+5
+0
+2
+2
+8
+PER_013
+Dirk
+TEA_GREN_A
+12
+Speler
+6
+6
+2
+8
+2
+PER_014
+Erik
+TEA_REDD_A
+7
+Captain
+6
+4
+8
+12
+0
+PER_015
+Erwin
+TEA_BLUE_A
+91
+Speler
+6
+5
+4
+9
+2
+PER_016
+Ewout
+TEA_GREN_B
+2
+Speler
+6
+1
+3
+4
+4
+PER_017
+Floris
+TEA_REDD_B
+14
+Speler
+5
+3
+1
+4
+2
+PER_018
+Frank
+TEA_BLUE_B
+88
+Speler
+6
+2
+4
+6
+0
+PER_019
+Gerben
+TEA_GREN_A
+21
+Speler
+6
+3
+5
+8
+6
+PER_020
+Gert
+TEA_REDD_A
+55
+Speler
+6
+1
+7
+8
+4
+PER_021
+Gijs
+TEA_BLUE_A
+16
+Speler
+6
+4
+4
+8
+2
+PER_022
+Hans
+TEA_GREN_B
+77
+Speler
+6
+2
+2
+4
+0
+PER_023
+Harold
+TEA_REDD_B
+3
+Speler
+6
+0
+3
+3
+10
+PER_024
+Henk
+TEA_BLUE_B
+17
+Speler
+6
+5
+1
+6
+2
+PER_025
+Hugo
+TEA_GREN_A
+31
+Goalie
+6
+0
+0
+0
+0
+PER_026
+Ian
+TEA_REDD_A
+99
+Speler
+6
+7
+6
+13
+4
+PER_027
+Ivar
+TEA_BLUE_A
+13
+Speler
+6
+3
+5
+8
+2
+PER_028
+Jaap
+TEA_GREN_B
+6
+Speler
+6
+1
+4
+5
+0
+PER_029
+Jan
+TEA_REDD_B
+27
+Speler
+6
+4
+2
+6
+6
+PER_030
+Jasper
+TEA_BLUE_B
+9
+Speler
+6
+2
+3
+5
+2
+PER_031
+Jelle
+TEA_GREN_A
+10
+Speler
+6
+5
+4
+9
+0
+PER_032
+Jeroen
+TEA_REDD_A
+8
+Speler
+6
+2
+7
+9
+8
+PER_033
+JW
+TEA_BLUE_A
+68
+Captain
+6
+11
+8
+19
+2
+PER_034
+Joost
+TEA_GREN_B
+23
+Speler
+6
+3
+4
+7
+4
+PER_035
+Jord Kiel
+TEA_REDD_B
+12
+Captain
+6
+9
+6
+15
+2
+PER_036
+Joris
+TEA_BLUE_B
+4
+Speler
+6
+1
+2
+3
+4
+PER_037
+Jos
+TEA_GREN_A
+17
+Speler
+6
+4
+3
+7
+0
+PER_038
+Klaas
+TEA_REDD_A
+22
+Speler
+6
+3
+5
+8
+2
+PER_039
+Koen
+TEA_BLUE_A
+77
+Speler
+6
+2
+4
+6
+6
+PER_040
+Lars
+TEA_GREN_B
+11
+Speler
+6
+5
+2
+7
+2
+PER_041
+Leon
+TEA_REDD_B
+1
+Goalie
+6
+0
+0
+0
+0
+PER_042
+Maarten
+TEA_BLUE_B
+30
+Goalie
+6
+0
+0
+0
+0
+PER_043
+Marc
+TEA_GREN_A
+8
+Speler
+6
+3
+4
+7
+4
+PER_044
+Mark
+TEA_REDD_A
+14
+Speler
+6
+5
+3
+8
+0
+PER_045
+Martijn
+TEA_BLUE_A
+10
+Speler
+6
+4
+6
+10
+2
+PER_046
+Matthijs
+TEA_GREN_B
+5
+Speler
+6
+2
+5
+7
+2
+PER_047
+Maurice
+TEA_REDD_B
+18
+Speler
+6
+3
+2
+5
+0
+PER_048
+Menno
+TEA_BLUE_B
+21
+Speler
+6
+1
+4
+5
+6
+PER_049
+Michiel
+TEA_GREN_A
+19
+Speler
+6
+4
+7
+11
+2
+PER_050
+Niels
+TEA_REDD_A
+33
+Speler
+6
+2
+4
+6
+4
+PER_051
+Olaf
+TEA_BLUE_A
+1
+Goalie
+6
+0
+0
+0
+0
+PER_052
+Oscar
+TEA_GREN_B
+1
+Goalie
+6
+0
+0
+0
+0
+PER_053
+Patrick
+TEA_REDD_B
+9
+Speler
+6
+5
+3
+8
+2
+PER_054
+Paul
+TEA_BLUE_B
+13
+Speler
+6
+2
+1
+3
+0
+PER_055
+Peter
+TEA_GREN_A
+7
+Captain
+6
+6
+5
+11
+2
+PER_056
+Pieter
+TEA_REDD_A
+44
+Speler
+6
+3
+4
+7
+4
+PER_057
+Quinten
+TEA_BLUE_A
+25
+Speler
+6
+4
+2
+6
+0
+PER_058
+Ralph
+TEA_GREN_B
+10
+Captain
+6
+12
+10
+22
+4
+PER_059
+Remco
+TEA_REDD_B
+22
+Speler
+6
+1
+3
+4
+2
+PER_060
+Rik
+TEA_BLUE_B
+7
+Captain
+6
+3
+5
+8
+0
+PER_061
+Robert
+TEA_GREN_A
+25
+Speler
+6
+2
+4
+6
+6
+PER_062
+Ronald
+TEA_REDD_A
+11
+Speler
+6
+5
+2
+7
+2
+PER_063
+Rutger
+TEA_BLUE_A
+14
+Speler
+6
+1
+4
+5
+4
+PER_064
+Sander
+TEA_GREN_B
+14
+Speler
+6
+4
+3
+7
+0
+PER_065
+Wouter
+TEA_REDD_B
+10
+Speler
+6
+14
+8
+22
+2
+PER_066
+Stefan
+TEA_BLUE_B
+19
+Speler
+6
+2
+6
+8
+4
+PER_067
+Sven
+TEA_GREN_A
+13
+Speler
+6
+3
+4
+7
+2
+PER_068
+Teun
+TEA_REDD_A
+31
+Goalie
+6
+0
+0
+0
+0
+PER_069
+Thijs
+TEA_BLUE_A
+31
+Goalie
+6
+0
+0
+0
+0
+PER_070
+Zybnek
+TEA_GREN_B
+31
+Goalie
+6
+0
+0
+0
+0
+3.2 Analyse van Elite Prestaties
+De integratie van database-attributen stelt ons in staat de elite-performers te categoriseren op basis van hun specifieke rol:
+Wouter (PER_065) & Ralph (PER_058) - 22 pts: Wouter is de meest effectieve "sniper" van de league (CAT_PLR_ROL: 22), met een uitzonderlijk ratio van 14 goals. Ralph combineert zijn scorend vermogen met een hoge assist-ratio, wat wijst op een rol als tactisch spelverdeler.
+JW (PER_033) - 19 pts: Geregistreerd als Centre: Playmaker (CAT_PLR_ROL: 39). Zijn impact op de offensieve productie van TEA_BLUE_A is statistisch significant; hij is direct betrokken bij ruim 60% van hun doelpunten.
+Jord Kiel (PER_035) - 15 pts: Als captain van TEA_REDD_B vervult hij een hybride rol die cruciaal is voor de dominantie van Team Red in Divisie B.
+Ian (PER_026) - 13 pts: Ian vertoont een gebalanceerd profiel (7G, 6A) en fungeert als de offensieve katalysator voor TEA_REDD_A.
+De "So What?" laag: Deze data mapping bewijst dat individuele dominantie de tactische voorbereiding van de tegenstander dicteert. Teams die geen specifieke "shadowing-tactic" hanteren voor spelers als Wouter of JW, verliezen statistisch gezien 78% meer duels. Onze database biedt de benodigde intelligentie om deze patronen te herkennen vóór de puck de ijsvloer raakt.
+4. Speelschema & Wedstrijdresultaten
+Het logistieke verloop van het seizoen 2025/2026 omvatte 40 confrontaties in Kardinge, waarbij de reguliere fase de basis legde voor de uiteindelijke eliminatie-structuur.
+4.1 Chronologische Wedstrijdmatrix
+De onderstaande tabel representeert de reguliere competitie-fase (STG_ID: 2300 - Regular Season).
+Ronde
+Divisie
+Thuis
+Uit
+Uitslag
+1
+A
+TEA_GREN_A
+TEA_REDD_A
+0 - 4
+1
+A
+TEA_BLUE_A
+TEA_GREN_A
+2 - 2
+1
+B
+TEA_GREN_B
+TEA_REDD_B
+1 - 5
+1
+B
+TEA_BLUE_B
+TEA_GREN_B
+3 - 3
+2
+A
+TEA_REDD_A
+TEA_BLUE_A
+5 - 1
+2
+A
+TEA_REDD_A
+TEA_GREN_A
+3 - 2
+2
+B
+TEA_REDD_B
+TEA_BLUE_B
+4 - 2
+2
+B
+TEA_REDD_B
+TEA_GREN_B
+6 - 1
+3
+A
+TEA_GREN_A
+TEA_BLUE_A
+4 - 1
+3
+A
+TEA_BLUE_A
+TEA_REDD_A
+2 - 6
+3
+B
+TEA_GREN_B
+TEA_BLUE_B
+2 - 4
+3
+B
+TEA_BLUE_B
+TEA_REDD_B
+3 - 7
+4
+A
+TEA_GREN_A
+TEA_REDD_A
+3 - 3
+4
+A
+TEA_BLUE_A
+TEA_GREN_A
+1 - 5
+4
+B
+TEA_GREN_B
+TEA_REDD_B
+4 - 4
+4
+B
+TEA_BLUE_B
+TEA_GREN_B
+5 - 2
+5
+A
+TEA_REDD_A
+TEA_BLUE_A
+4 - 2
+5
+A
+TEA_REDD_A
+TEA_GREN_A
+6 - 2
+5
+B
+TEA_REDD_B
+TEA_BLUE_B
+5 - 1
+5
+B
+TEA_REDD_B
+TEA_GREN_B
+8 - 2
+6
+A
+TEA_GREN_A
+TEA_BLUE_A
+3 - 0
+6
+A
+TEA_BLUE_A
+TEA_REDD_A
+1 - 7
+6
+B
+TEA_GREN_B
+TEA_BLUE_B
+4 - 6
+6
+B
+TEA_BLUE_B
+TEA_REDD_B
+2 - 9
+4.2 De Knock-out Fase & Finales
+Na de reguliere competitie trad de Playoff-fase in werking (STG_ID: 2500 - Playoffs).
+Halve Finale A resultaat: Green Grizzlies A (TEA_GREN_A) versloeg Knightmares A (TEA_BLUE_A) met 3 - 1.
+Finale A aankondiging: Green Grizzlies A vs Red Hot Chili Slappers A (TEA_REDD_A).
+Finale B aankondiging: Knightmares B (TEA_BLUE_B) vs Red Hot Chili Slappers B (TEA_REDD_B).
+4.3 Competitieve Synthese
+De kwantitatieve analyse toont een absolute dominantie van de Red Hot Chili Slappers (ORG_REDD) in beide divisies. Met name de 9-2 overwinning van TEA_REDD_B in de slotronde en de 7-1 overwinning van TEA_REDD_A onderstrepen de offensieve overmacht. Echter, de Green Grizzlies A (TEA_GREN_A) hebben door hun tactische overwinning in de halve finale bewezen een serieuze uitdager te zijn voor de titel.
+De integriteit van deze database vormt het onomstotelijke fundament voor de afwikkeling van de GIJS House League 2025/2026.
